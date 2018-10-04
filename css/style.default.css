@@ -1987,3 +1987,8 @@ code {
     margin-left: 15px;
   }
 }
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}

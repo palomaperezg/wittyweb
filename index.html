@@ -202,7 +202,7 @@
             <h2 class="heading">Contacto</h2>
             <div class="row">
               <div class="col-lg-6">
-                <form id="contact-form" method="post" action="#" class="contact-form">
+                <form id="contact-form" onsubmit='return submitForm(this)' class="contact-form">
                   <div class="controls">
                     <div class="row">
                       <div class="col-md-6">
@@ -227,7 +227,11 @@
                       <textarea rows="4" name="message" placeholder="Escribe tu mensaje" required="required" class="form-control"></textarea>
                     </div>
                     <div class="text-center">
-                      <input type="submit" name="name" value="Enviar mensaje" class="btn btn-outline-primary btn-block">
+                      <input type="submit" class="btn btn-outline-primary btn-block">
+                    </div>
+                    <div id="formSent" class="alert alert-success hidden">
+                      <strong>Gracias por contactar!</strong>
+                    </div>
                     </div>
                   </div>
                 </form>
@@ -266,5 +270,18 @@
     <script src="vendor/lightbox2/js/lightbox.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;amp;sensor=false"> </script>
     <script src="js/front.js"></script>
+    <script language="javascript" type="text/javascript">
+      function submitForm(form) {
+        var data = {
+          name: form.name.value,
+          surname: form.surname.value,
+          email: form.email.value,
+          message: form.message.value
+        }
+        $.post( "https://cwzo69p7b4.execute-api.eu-west-1.amazonaws.com/prod/contact", JSON.stringify(data) );
+        $("#formSent").removeClass('hidden');
+        return false; 
+      }
+  </script>
   </body>
 </html>
